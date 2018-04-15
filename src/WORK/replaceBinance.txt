@@ -1,0 +1,16 @@
+Replace :
+<div class="coin f-left ng-binding">.*</div>
+<empty>
+
+<div class="total f-left ng-binding">.*</div>
+<empty>
+
+</li><!-- end ngRepeat: asset in asset --><li class="td ng-scope" ng-repeat="asset in asset">
+
+<div class="items f-cb">
+
+<div class="fullName f-left ng-binding">
+
+</div>
+
+<div class="useable f-right ng-binding">
