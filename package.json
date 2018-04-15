@@ -1,17 +1,8 @@
 {
   "name": "arbitrage",
   "version": "0.1.0",
-  "description": "Node.js sample app for OpenShift 3",
-  "main": "server.js",
+  "private": true,
   "dependencies": {
-    "chai": "^3.5.0",
-    "chai-http": "^2.0.1",
-    "ejs": "^2.4.1",
-    "express": "^4.13.4",
-    "mocha": "^2.4.5",
-    "mongodb": "^2.1.16",
-    "morgan": "^1.7.0",
-    "object-assign": "4.1.0",
     "ajv": "^6.4.0",
     "bootstrap": "^3.3.7",
     "json-loader": "^0.5.7",
@@ -23,11 +14,10 @@
     "react-dom": "^16.3.1",
     "react-scripts": "1.1.4"
   },
-  "engine": {
-    "node": "*",
-    "npm": "*"
-  },
   "scripts": {
-    "start": "node server.js"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }
