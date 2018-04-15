@@ -1,7 +1,7 @@
 {
-  "name": "arbitrage",
-  "version": "0.1.0",
-  "private": true,
+  "name": "nodejs-ex",
+  "version": "0.0.1",
+  "description": "Node.js sample app for OpenShift 3",
   "main": "server.js",
   "dependencies": {
     "chai": "^3.5.0",
@@ -11,18 +11,7 @@
     "mocha": "^2.4.5",
     "mongodb": "^2.1.16",
     "morgan": "^1.7.0",
-    "object-assign":"4.1.0",
-    
-    "ajv": "^6.4.0",
-    "bootstrap": "^3.3.7",
-    "json-loader": "^0.5.7",
-    "json-query": "^2.2.2",
-    "json-stringify": "^1.0.0",
-    "path": "^0.12.7",
-    "react": "^16.3.1",
-    "react-bootstrap": "^0.32.1",
-    "react-dom": "^16.3.1",
-    "react-scripts": "1.1.4"
+    "object-assign":"4.1.0"
   },
   "engine": {
     "node": "*",
@@ -34,6 +23,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/corrsalie/CryptoArbitrageFees.git"
-  }
+    "url": "http://github.com/openshift/nodejs-ex.git"
+  },
+  "author": "Steve Speicher <sspeiche@gmail.com>",
+  "license": "CC-BY-1.0",
+  "bugs": {
+    "url": "http://github.com/openshift/nodejs-ex/issues"
+  },
+  "homepage": "http://github.com/openshift/nodejs-ex"
 }
