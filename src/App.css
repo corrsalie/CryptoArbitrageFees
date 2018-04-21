@@ -1,5 +1,9 @@
 body {
-    text-align: center ;
+  padding-bottom: 50px;
+}
+
+div.App {
+  font-size: 1.2em;
 }
 
 div.explain{
@@ -8,9 +12,9 @@ div.explain{
 }
 
 table {
-    margin: 20px auto; 
+    margin: 20px auto;
 }
-    
+
 
 td, th {
     padding-left: 5px !important;
@@ -38,9 +42,9 @@ div.disclaimer{
   padding-top: 50px;
 }
 
-input, select {
- margin-left: 10px !important; 
- margin-right: 5px !important; 
+input, select, button {
+ margin-left: 10px !important;
+ margin-right: 5px !important;
 }
 
 td.toFill {
@@ -54,4 +58,198 @@ p.formError {
 
 p.info {
   font-style: italic;
+}
+
+div.newForm {
+    text-align: left ;
+}
+
+div.newForm table, tr, td {
+    border: none;
+    margin: auto;
+}
+
+div.newForm h1 {
+  color: #3366ff;
+  font-size: 1.6em;
+}
+
+div.newForm hr {
+  color: #3366ff;
+  height: 2px;
+  background-color: #3366ff;
+  border: none;
+}
+
+div.newForm td {
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+
+div.newForm td.small{
+  width:auto;
+    text-align:right;
+    white-space: nowrap
+}
+
+h1.Result {
+    text-align: center ;
+}
+
+/**
+ * table with rounded corners
+ */
+
+
+/* table has shadow */
+
+div.ResultTest table {
+	border-radius: 10px;
+	margin: 20px auto;
+	border-collapse: collapse;
+	border-spacing:0;
+	box-shadow: 0 2px 10px #ccc;
+}
+
+/*every cell has a border on bottom & right*/
+
+div.ResultTest td {
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	padding: 10px 20px;
+	color: #444;
+}
+
+/*cancel the right border on the last column*/
+
+div.ResultTest td:last-child {
+	border-right: none;
+}
+
+/*th has border only on bottom*/
+
+div.ResultTest th {
+	border-bottom: 1px solid #ccc;
+	padding: 10px 20px;
+
+}
+
+/*rounded corner top left - first th*/
+
+div.ResultTest th:first-child {
+	border-radius: 10px 0 0 0;
+}
+
+/*rounded corner top right - last th*/
+
+div.ResultTest th:last-child {
+	border-radius: 0 10px 0 0;
+
+}
+
+/*rounder corner bottom left - first cell of last row*/
+
+div.ResultTest tr:last-child td:first-child {
+	border-radius: 0 0 0 10px;
+}
+
+/*rounded corner bottom right - last cell of last row*/
+
+div.ResultTest tr:last-child td:last-child {
+	border-radius: 0 0 10px 0;
+
+}
+
+/*last row in has no border on the bottom*/
+
+div.ResultTest table tr:last-child td {
+	border-bottom: none;
+
+}
+
+/*table header style*/
+/*note: the gradient must be on the <th> & <td>,
+ff you put it on the <tr> it will stick out of the
+rounded corners in Firefox*/
+
+div.ResultTest thead tr th {
+	background-image: linear-gradient(top, #f7f7f7 0%, #d4d4d4 100%);;
+
+}
+
+/*table row style*/
+
+div.ResultTest tr td {
+	background-image: linear-gradient(top, #ffffff 0%, #e4f0ff 100%);
+	text-shadow: 0 1px 0 #fff;
+}
+
+/*table even rows style*/
+
+div.ResultTest tr:nth-child(even) td {
+	background-image: linear-gradient(top, #ffffff 0%, #eee 100%);
+
+}
+
+
+
+div.Profit table {
+  border-collapse: separate;
+  border-spacing: 20px 0;
+}
+div.Profit td.startAvail,  td.endAvail {
+  border-radius: 10px 10px 10px 10px;
+  background-color: #66ccff;
+}
+div.Profit td.price1 {
+  border-radius: 10px 10px 10px 10px;
+  background-color: #001a4d;
+  color: white;
+}
+div.Profit td.price2 {
+  border-radius: 10px 10px 10px 10px;
+  background-color: #001a4d;
+  color: white;
+}
+div.Profit td.startMinProf, td.endMinProf {
+  border-radius: 10px 10px 10px 10px;
+  background-color: #99ccff;
+}
+div.Profit td.arrow1 {
+  color: #001a4d;
+  font-size: 4em;
+  text-align: center ;
+}
+div.Profit td.arrow2 {
+  color: #001a4d;
+  font-size: 4em;
+  text-align: center ;
+}
+div.Profit td.startPercentProf, td.endPercentProf {
+  border-radius: 10px 10px 10px 10px;
+  background-color: #9999ff;
+}
+
+
+
+
+div.Profit td {
+    padding: 20px !important;
+}
+
+div.Profit td.emptyCol1 {
+    border-left: 5px solid #0088cc;
+    padding: 0 !important;
+}
+
+div.Profit td.emptyCol2 {
+    border-left: 5px solid #001133;
+    padding: 0 !important;
+}
+
+
+div.Profit td.emptyCol3 {
+    border-left: 5px solid #001133;
+    padding: 0 !important;
 }

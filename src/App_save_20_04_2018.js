@@ -107,7 +107,7 @@ class App extends Component {
       pageState: pageState,
       resultState: resultState,
       lang: "eng",
-      displayHowTo: false,
+      displayHowTo: true,
       displayDisclaimer: true,
       displayGift: true
     };
@@ -699,169 +699,161 @@ You can also support me by making a gift if you want to :). Here are my public c
     <Col xs={10} sm={10} md={10} lg={10} xsOffset={1} smOffset={1} mdOffset={1} lgOffset={1}>
       {this.howToUseAndWhy()}
 
-      <div className="newForm">
-        <table>
-          <tr>
-            <td colspan="2">
-              <h1>Cryptocurrencies</h1> <hr/>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              If your arbitrage concerns the pair BTC/LTC, then the main is BTC and the arbitrage currency is LTC.
-            </td>
-          </tr>
-              <tr>
-            <td className="small">
-              Choose the main cryptocurrency
-            </td>
-            <td>
-              <select value={this.state.pageState.mainCrypto} onChange={this.handleChange_MainCrypto}>
-                {this.allCoins.map(this.getCoinSrcChoices)}
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td className="small">
-              Choose the arbitrage cryptocurrency
-            </td>
-            <td>
-              <select value={this.state.pageState.altcoin} onChange={this.handleChange_Altcoin}>
-                {this.allCoins.map(this.getCoinDestChoices)}
-              </select>
-            </td>
-          </tr>
+      <table className="form">
+    		<tr>
+    		  <td>
+    		    <label>
+    		      Exchange Source:
+    		      <select value={this.state.pageState.exchangeSource} onChange={this.handleChange_ExchangeSource}>
+    			{this.allExchanges.map(this.getExchangeSourceChoices)}
+    		      </select>
+    		    </label><br/>
+    		    <p className="info">{this.displayExchangeSrcInfo()}</p>
+    		  </td>
+    		  <td>
+    		    <label>
+    		      Exchange Destination:
+    		      <select value={this.state.pageState.exchangeDest} onChange={this.handleChange_ExchangeDest}>
+    			{this.allExchanges.map(this.getExchangeDestChoices)}
+    		      </select>
+    		    </label><br/>
+    		    <p className="info">{this.displayExchangeDestInfo()}</p>
+    		  </td>
+    		</tr>
 
-          <tr>
-            <td colspan="2">
-              <h1>Exchange Source Platform</h1> <hr/>
-            </td>
-          </tr>
-          <tr>
-            <td className="small">
-              Choose the exchange source
-            </td>
-            <td>
-              <select value={this.state.pageState.exchangeSource} onChange={this.handleChange_ExchangeSource}>
-                {this.allExchanges.map(this.getExchangeSourceChoices)}
-              </select>
-              <p className="info">{this.displayExchangeSrcInfo()}</p>
-            </td>
-          </tr>
-          <tr>
-            <td className="small">
-              Trading fees from {this.state.pageState.mainCrypto} to {this.state.pageState.altcoin}:
-            </td>
-            <td>
-              <input type="number" step="0.00001" min="0" value={this.state.pageState.fromMainCrypto_To_AltcoinSrcFees} onChange={this.handleChange_fromMainCrypto_To_AltcoinSrcFees} />{this.state.pageState.mainCrypto}
-              <p hidden={!this.state.pageState.fromMainCrypto_To_AltcoinSrcFeesStatusDisplay} className="formError info">{this.displayTradingFeesSrcStatus()}</p><br/>
-              <input type="number" step="0.001" min="0" value={this.state.pageState.fromMainCrypto_To_AltcoinSrcFeesPercent} onChange={this.handleChange_fromMainCrypto_To_AltcoinSrcFeesPercent} />%
-              <p hidden={!this.state.pageState.fromMainCrypto_To_AltcoinSrcFeesPercentStatusDisplay} className="formError info">{this.displayTradingFeesPercentSrcStatus()}</p><br/>
-            </td>
-          </tr>
-          <tr>
-            <td className="small">
-              Withdraw fees from {this.state.pageState.mainCrypto} to {this.state.pageState.altcoin}:
-            </td>
-            <td>
-              <input type="number" step="0.00001" min="0" value={this.state.pageState.fromExchangeSource_To_DestFees} onChange={this.handleChange_FromExchangeSource_To_DestFees} />{this.state.pageState.altcoin}
-              <p hidden={!this.state.pageState.fromExchangeSource_To_DestFeesStatusDisplay} className="formError info">{this.displayTransferFeesSrcStatus()}</p><br/>
-              <input type="number" step="0.001" min="0" value={this.state.pageState.fromExchangeSource_To_DestFeesPercent} onChange={this.handleChange_FromExchangeSource_To_DestFeesPercent} />%
-              <p hidden={!this.state.pageState.fromExchangeSource_To_DestFeesPercentStatusDisplay} className="formError info">{this.displayTransferFeesPercentSrcStatus()}</p><br/>
-            </td>
-          </tr>
+    		<tr>
+    		  <td>
+    		    <label>
+    		      Main crypto:
+    		      <select value={this.state.pageState.mainCrypto} onChange={this.handleChange_MainCrypto}>
+    			{this.allCoins.map(this.getCoinSrcChoices)}
+    		      </select>
+    		    </label>
+    		  </td>
+    		  <td>
+    		    <label>
+    		      Arbitrage crypto:
+    		      <select value={this.state.pageState.altcoin} onChange={this.handleChange_Altcoin}>
+    			{this.allCoins.map(this.getCoinDestChoices)}
+    		      </select>
+    		    </label>
+    		  </td>
+    		</tr>
 
-          <tr>
-            <td colspan="2">
-              <h1>Exchange Destination Platform</h1> <hr/>
-            </td>
-          </tr>
-          <tr>
-            <td className="small">
-              Choose the exchange destination
-            </td>
-            <td>
-              <select value={this.state.pageState.exchangeDest} onChange={this.handleChange_ExchangeDest}>
-                {this.allExchanges.map(this.getExchangeDestChoices)}
-              </select>
-              <p className="info">{this.displayExchangeDestInfo()}</p>
-            </td>
-          </tr>
-          <tr>
-            <td className="small">
-              Trading fees from {this.state.pageState.altcoin} to {this.state.pageState.mainCrypto}:
-            </td>
-            <td>
-              <input type="number" step="0.00001" min="0" value={this.state.pageState.fromMainCrypto_To_AltcoinDstFees} onChange={this.handleChange_fromMainCrypto_To_AltcoinDstFees} />{this.state.pageState.altcoin}
-              <p hidden={!this.state.pageState.fromMainCrypto_To_AltcoinDstFeesStatusDisplay} className="formError info">{this.displayTradingFeesDestStatus()}</p><br/>
-              <input type="number" step="0.001" min="0" value={this.state.pageState.fromMainCrypto_To_AltcoinDstFeesPercent} onChange={this.handleChange_fromMainCrypto_To_AltcoinDstFeesPercent} />%
-              <p hidden={!this.state.pageState.fromMainCrypto_To_AltcoinDstFeesPercentStatusDisplay} className="formError info">{this.displayTradingFeesPercentDestStatus()}</p><br/>
-            </td>
-          </tr>
-          <tr>
-            <td className="small">
-              Deposit fees:
-            </td>
-            <td>
-              <input type="number" step="0.00001" min="0" value={this.state.pageState.fromExchangeSource_To_DestFeesDepo} onChange={this.handleChange_FromExchangeSource_To_DestFeesDepo} />{this.state.pageState.altcoin}
-              <p hidden={!this.state.pageState.fromExchangeSource_To_DestFeesDepoStatusDisplay} className="formError info">{this.displayTransferFeesDstStatus()}</p><br/>
-              <input type="number" step="0.001" min="0" value={this.state.pageState.fromExchangeSource_To_DestFeesDepoPercent} onChange={this.handleChange_FromExchangeSource_To_DestFeesDepoPercent} />%
-              <p hidden={!this.state.pageState.fromExchangeSource_To_DestFeesDepoPercentStatusDisplay} className="formError info">{this.displayTransferFeesPercentDstStatus()}</p><br/>
-            </td>
-          </tr>
+    		<tr>
+    		  <td className="toFill">
+    		    <label>
+    		      How much {this.state.pageState.mainCrypto} available:
+    		      <input type="number" step="0.00001" min="0" value={this.state.pageState.availableMainCrypto} onChange={this.handleChange_AvailableMainCrypto} />
+    		    </label>{this.state.pageState.mainCrypto}
+    		  </td>
+    		  <td></td>
+    		</tr>
 
-          <tr>
-            <td colspan="2">
-              <h1>Currencies Price</h1> <hr/>
-            </td>
-          </tr>
-          <tr>
-            <td className="small">
-              On {this.state.pageState.exchangeSource}
-            </td>
-            <td>
-              <input type="number" step="0.00001" min="0" value={this.state.pageState.fromMainCrypto_To_AltcoinSrc} onChange={this.handleChange_fromMainCrypto_To_AltcoinSrc} /> {this.state.pageState.mainCrypto} = 1 {this.state.pageState.altcoin}
-            </td>
-          </tr>
-          <tr>
-            <td className="small">
-              On {this.state.pageState.exchangeDest}
-            </td>
-            <td>
-              <input type="number" step="0.00001" min="0" value={this.state.pageState.fromMainCrypto_To_AltcoinDst} onChange={this.handleChange_fromMainCrypto_To_AltcoinDst} /> {this.state.pageState.mainCrypto} = 1 {this.state.pageState.altcoin}
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <h1>Arbitrage Profit</h1> <hr/>
-            </td>
-          </tr>
-          <tr>
-            <td className="small">
-              Available on {this.state.pageState.exchangeSource} :
-            </td>
-            <td>
-              <input type="number" step="0.00001" min="0" value={this.state.pageState.availableMainCrypto} onChange={this.handleChange_AvailableMainCrypto} /> {this.state.pageState.mainCrypto}
-            </td>
-          </tr>
-          <tr>
-            <td className="small">
-              Minimum profit wanted :
-            </td>
-            <td>
-              <input type="number" step="0.00001" min="0" value={this.state.pageState.minProfit} onChange={this.handleChange_MinProfit} />{this.state.pageState.mainCrypto}<br/>
-              <input type="number" step="1" min="0" value={this.state.pageState.minProfitPercent} onChange={this.handleChange_MinProfitPercent} />%<br/>
-            </td>
-          </tr>
-          <tr>
-            <td className="small"></td>
-            <td style={{textAlign: "left"}}>
-              <button onClick={this.handleSubmit}>Make Profit</button>
-            </td>
-          </tr>
+    		<tr>
+    		  <td className="toFill">
+    		    <label>
+    		      Minimum Profit in {this.state.pageState.mainCrypto}:
+    		      <input type="number" step="0.00001" min="0" value={this.state.pageState.minProfit} onChange={this.handleChange_MinProfit} />
+    		    </label>{this.state.pageState.mainCrypto}
+    		  </td>
+    		  <td className="toFill">
+    		    <label>
+    		      Minimum Profit in Percent:
+    		      <input type="number" step="1" min="0" value={this.state.pageState.minProfitPercent} onChange={this.handleChange_MinProfitPercent} />
+    		    </label>%<br/>
+    		  </td>
+    		</tr>
+
+    		<tr>
+    		  <td className="toFill">
+    		    <label>
+    		      Price from {this.state.pageState.mainCrypto} to {this.state.pageState.altcoin} on {this.state.pageState.exchangeSource}<br/>
+    		      1{this.state.pageState.altcoin} = <input type="number" step="0.00001" min="0" value={this.state.pageState.fromMainCrypto_To_AltcoinSrc} onChange={this.handleChange_fromMainCrypto_To_AltcoinSrc} />
+    		    </label> {this.state.pageState.mainCrypto}
+    		  </td>
+    		  <td className="toFill">
+    		    <label>
+    		      Price from {this.state.pageState.mainCrypto} to {this.state.pageState.altcoin} on {this.state.pageState.exchangeDest}<br/>
+    		      1{this.state.pageState.altcoin} = <input type="number" step="0.00001" min="0" value={this.state.pageState.fromMainCrypto_To_AltcoinDst} onChange={this.handleChange_fromMainCrypto_To_AltcoinDst} />
+    		    </label> {this.state.pageState.mainCrypto}
+    		  </td>
+    		</tr>
+
+    		<tr>
+    		  <td>
+    		    <label>
+    		      Trading fees in {this.state.pageState.altcoin} : from {this.state.pageState.mainCrypto} to {this.state.pageState.altcoin} on {this.state.pageState.exchangeSource}<br/>
+    		      <input type="number" step="0.00001" min="0" value={this.state.pageState.fromMainCrypto_To_AltcoinSrcFees} onChange={this.handleChange_fromMainCrypto_To_AltcoinSrcFees} />
+    		    </label>{this.state.pageState.altcoin}<br/>
+    		    <p hidden={!this.state.pageState.fromMainCrypto_To_AltcoinSrcFeesStatusDisplay} className="formError info">{this.displayTradingFeesSrcStatus()}</p>
+    		  </td>
+    		  <td>
+    		    <label>
+    		      Trading fees in percentage : from {this.state.pageState.mainCrypto} to {this.state.pageState.altcoin} on {this.state.pageState.exchangeSource}<br/>
+    		      <input type="number" step="0.001" min="0" value={this.state.pageState.fromMainCrypto_To_AltcoinSrcFeesPercent} onChange={this.handleChange_fromMainCrypto_To_AltcoinSrcFeesPercent} />
+    		    </label>%<br/>
+    		    <p hidden={!this.state.pageState.fromMainCrypto_To_AltcoinSrcFeesPercentStatusDisplay} className="formError info">{this.displayTradingFeesPercentSrcStatus()}</p>
+    		  </td>
+    		</tr>
+
+    		<tr>
+    		  <td>
+    		    <label>
+    		      Withdraw fees in {this.state.pageState.altcoin} : from {this.state.pageState.exchangeSource} to {this.state.pageState.exchangeDest}<br/>
+    		      <input type="number" step="0.00001" min="0" value={this.state.pageState.fromExchangeSource_To_DestFees} onChange={this.handleChange_FromExchangeSource_To_DestFees} />
+    		    </label>{this.state.pageState.altcoin}<br/>
+    		    <p hidden={!this.state.pageState.fromExchangeSource_To_DestFeesStatusDisplay} className="formError info">{this.displayTransferFeesSrcStatus()}</p>
+    		  </td>
+    		  <td>
+    		    <label>
+    		      Withdraw fees in percentage : from {this.state.pageState.exchangeSource} to {this.state.pageState.exchangeDest}<br/>
+    		      <input type="number" step="0.001" min="0" value={this.state.pageState.fromExchangeSource_To_DestFeesPercent} onChange={this.handleChange_FromExchangeSource_To_DestFeesPercent} />
+    		    </label>%<br/>
+    		    <p hidden={!this.state.pageState.fromExchangeSource_To_DestFeesPercentStatusDisplay} className="formError info">{this.displayTransferFeesPercentSrcStatus()}</p>
+    		  </td>
+    		</tr>
+
+    		<tr>
+    		  <td>
+    		    <label>
+    		      Deposit fees in {this.state.pageState.altcoin} : from {this.state.pageState.exchangeSource} to {this.state.pageState.exchangeDest}<br/>
+    		      <input type="number" step="0.00001" min="0" value={this.state.pageState.fromExchangeSource_To_DestFeesDepo} onChange={this.handleChange_FromExchangeSource_To_DestFeesDepo} />
+    		    </label>{this.state.pageState.altcoin}<br/>
+    		    <p hidden={!this.state.pageState.fromExchangeSource_To_DestFeesDepoStatusDisplay} className="formError info">{this.displayTransferFeesDstStatus()}</p>
+    		  </td>
+    		  <td>
+    		    <label>
+    		      Deposit fees in percentage : from {this.state.pageState.exchangeSource} to {this.state.pageState.exchangeDest}<br/>
+    		      <input type="number" step="0.001" min="0" value={this.state.pageState.fromExchangeSource_To_DestFeesDepoPercent} onChange={this.handleChange_FromExchangeSource_To_DestFeesDepoPercent} />
+    		    </label>%<br/>
+    		    <p hidden={!this.state.pageState.fromExchangeSource_To_DestFeesDepoPercentStatusDisplay} className="formError info">{this.displayTransferFeesPercentDstStatus()}</p>
+    		  </td>
+    		</tr>
+
+    		<tr>
+    		  <td>
+    		    <label>
+    		      Trading fees in {this.state.pageState.mainCrypto}: from {this.state.pageState.altcoin} to {this.state.pageState.mainCrypto} on {this.state.pageState.exchangeDest}<br/>
+    		      <input type="number" step="0.00001" min="0" value={this.state.pageState.fromMainCrypto_To_AltcoinDstFees} onChange={this.handleChange_fromMainCrypto_To_AltcoinDstFees} />
+    		    </label>{this.state.pageState.mainCrypto}<br/>
+    		    <p hidden={!this.state.pageState.fromMainCrypto_To_AltcoinDstFeesStatusDisplay} className="formError info">{this.displayTradingFeesDestStatus()}</p>
+    		  </td>
+    		  <td>
+    		    <label>
+    		      Trading fees : percentage: from {this.state.pageState.altcoin} to {this.state.pageState.mainCrypto} on {this.state.pageState.exchangeDest}<br/>
+    		      <input type="number" step="0.001" min="0" value={this.state.pageState.fromMainCrypto_To_AltcoinDstFeesPercent} onChange={this.handleChange_fromMainCrypto_To_AltcoinDstFeesPercent} />
+    		    </label>%<br/>
+    		    <p hidden={!this.state.pageState.fromMainCrypto_To_AltcoinDstFeesPercentStatusDisplay} className="formError info">{this.displayTradingFeesPercentDestStatus()}</p>
+    		  </td>
+    		</tr>
+
+    		<tr>
+    		  <td colspan="2" style={{textAlign: "center"}}>
+    		    <button onClick={this.handleSubmit}>Make Profit</button>
+    		  </td>
+    		</tr>
       </table>
-
-    </div>
 	   </Col>
 	  </Row>
 	  <Row className="show-grid">
@@ -875,6 +867,344 @@ You can also support me by making a gift if you want to :). Here are my public c
 	  <Row className="show-grid">
 	    <Col xs={10} sm={10} md={10} lg={10} xsOffset={1} smOffset={1} mdOffset={1} lgOffset={1}>
 	      {this.disclaimer()}
+	    </Col>
+	  </Row>
+
+
+
+	  <Row className="show-grid">
+	    <Col xs={10} sm={10} md={10} lg={10} xsOffset={1} smOffset={1} mdOffset={1} lgOffset={1}>
+
+	      <div className="newForm">
+	      <table>
+		<tr>
+		  <td colspan="2">
+		    <h1>Cryptocurrencies</h1> <hr/>
+		  </td>
+		</tr>
+		<tr>
+		  <td colspan="2">
+		    If your arbitrage concerns the pair BTC/LTC, then the main is BTC and the arbitrage currency is LTC.
+		  </td>
+		</tr>
+	      <tr>
+		  <td className="small">
+		    Choose the main cryptocurrency
+		  </td>
+		  <td>
+		    <input />
+		  </td>
+		</tr>
+		<tr>
+		  <td className="small">
+		    Choose the arbitrage cryptocurrency
+		  </td>
+		  <td>
+		    <input />
+		  </td>
+		</tr>
+
+		<tr>
+		  <td colspan="2">
+		    <h1>Exchange Source Platform</h1> <hr/>
+		  </td>
+		</tr>
+		<tr>
+		  <td className="small">
+		    Choose the exchange source
+		  </td>
+		  <td>
+		    <input />
+		  </td>
+		</tr>
+		<tr>
+		  <td className="small">
+		    Trading fees from BTC to LTC:
+		  </td>
+		  <td>
+		    <input />BTC<br/>
+		    <input />%<br/>
+		  </td>
+		</tr>
+		<tr>
+		  <td className="small">
+		    Withdraw fees from BTC to LTC:
+		  </td>
+		  <td>
+		    <input />BTC<br/>
+		    <input />%<br/>
+		  </td>
+		</tr>
+
+		<tr>
+		  <td colspan="2">
+		    <h1>Exchange Destination Platform</h1> <hr/>
+		  </td>
+		</tr>
+		<tr>
+		  <td className="small">
+		    Choose the exchange destination
+		  </td>
+		  <td>
+		    <input />
+		  </td>
+		</tr>
+		<tr>
+		  <td className="small">
+		    Trading fees from LTC to BTC:
+		  </td>
+		  <td>
+		    <input />LTC<br/>
+		    <input />%<br/>
+		  </td>
+		</tr>
+		<tr>
+		  <td className="small">
+		    Deposit fees:
+		  </td>
+		  <td>
+		    <input />LTC<br/>
+		    <input />%<br/>
+		  </td>
+		</tr>
+
+		<tr>
+		  <td colspan="2">
+		    <h1>Currencies Price</h1> <hr/>
+		  </td>
+		</tr>
+		<tr>
+		  <td className="small">
+		    On Binance
+		  </td>
+		  <td>
+		    <input /> BTC = 1 LTC
+		  </td>
+		</tr>
+		<tr>
+		  <td className="small">
+		    On Yobit
+		  </td>
+		  <td>
+		    <input /> BTC = 1 LTC
+		  </td>
+		</tr>
+		<tr>
+		  <td colspan="2">
+		    <h1>Arbitrage Profit</h1> <hr/>
+		  </td>
+		</tr>
+		<tr>
+		  <td className="small">
+		    Available on Binance :
+		  </td>
+		  <td>
+		    <input /> BTC
+		  </td>
+		</tr>
+		<tr>
+		  <td className="small">
+		    Minimum profit wanted :
+		  </td>
+		  <td>
+		    <input />BTC<br/>
+		    <input />%<br/>
+		  </td>
+		</tr>
+		<tr>
+		  <td className="small"></td>
+		  <td style={{textAlign: "left"}}>
+		    <button onClick={this.handleSubmit}>Make Profit</button>
+		  </td>
+		</tr>
+	      </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        	      <table>
+        		<tr>
+        		  <td colspan="2">
+        		    <h1>Cryptocurrencies</h1> <hr/>
+        		  </td>
+        		</tr>
+        		<tr>
+        		  <td colspan="2">
+        		    If your arbitrage concerns the pair BTC/LTC, then the main is BTC and the arbitrage currency is LTC.
+        		  </td>
+        		</tr>
+        	      <tr>
+        		  <td className="small">
+        		    Choose the main cryptocurrency
+        		  </td>
+        		  <td>
+                <select value={this.state.pageState.mainCrypto} onChange={this.handleChange_MainCrypto}>
+                  {this.allCoins.map(this.getCoinSrcChoices)}
+                </select>
+        		  </td>
+        		</tr>
+        		<tr>
+        		  <td className="small">
+        		    Choose the arbitrage cryptocurrency
+        		  </td>
+        		  <td>
+                <select value={this.state.pageState.altcoin} onChange={this.handleChange_Altcoin}>
+                  {this.allCoins.map(this.getCoinDestChoices)}
+                </select>
+        		  </td>
+        		</tr>
+
+        		<tr>
+        		  <td colspan="2">
+        		    <h1>Exchange Source Platform</h1> <hr/>
+        		  </td>
+        		</tr>
+        		<tr>
+        		  <td className="small">
+        		    Choose the exchange source
+        		  </td>
+        		  <td>
+                <select value={this.state.pageState.exchangeSource} onChange={this.handleChange_ExchangeSource}>
+                  {this.allExchanges.map(this.getExchangeSourceChoices)}
+                </select>
+                <p className="info">{this.displayExchangeSrcInfo()}</p>
+        		  </td>
+        		</tr>
+        		<tr>
+        		  <td className="small">
+        		    Trading fees from {this.state.pageState.mainCrypto} to {this.state.pageState.altcoin}:
+        		  </td>
+        		  <td>
+        		    <input type="number" step="0.00001" min="0" value={this.state.pageState.fromMainCrypto_To_AltcoinSrcFees} onChange={this.handleChange_fromMainCrypto_To_AltcoinSrcFees} />{this.state.pageState.mainCrypto}
+                <p hidden={!this.state.pageState.fromMainCrypto_To_AltcoinSrcFeesStatusDisplay} className="formError info">{this.displayTradingFeesSrcStatus()}</p><br/>
+        		    <input type="number" step="0.001" min="0" value={this.state.pageState.fromMainCrypto_To_AltcoinSrcFeesPercent} onChange={this.handleChange_fromMainCrypto_To_AltcoinSrcFeesPercent} />%
+                <p hidden={!this.state.pageState.fromMainCrypto_To_AltcoinSrcFeesPercentStatusDisplay} className="formError info">{this.displayTradingFeesPercentSrcStatus()}</p><br/>
+        		  </td>
+        		</tr>
+        		<tr>
+        		  <td className="small">
+        		    Withdraw fees from {this.state.pageState.mainCrypto} to {this.state.pageState.altcoin}:
+        		  </td>
+        		  <td>
+        		    <input type="number" step="0.00001" min="0" value={this.state.pageState.fromExchangeSource_To_DestFees} onChange={this.handleChange_FromExchangeSource_To_DestFees} />{this.state.pageState.altcoin}
+                <p hidden={!this.state.pageState.fromExchangeSource_To_DestFeesStatusDisplay} className="formError info">{this.displayTransferFeesSrcStatus()}</p><br/>
+        		    <input type="number" step="0.001" min="0" value={this.state.pageState.fromExchangeSource_To_DestFeesPercent} onChange={this.handleChange_FromExchangeSource_To_DestFeesPercent} />%
+                <p hidden={!this.state.pageState.fromExchangeSource_To_DestFeesPercentStatusDisplay} className="formError info">{this.displayTransferFeesPercentSrcStatus()}</p><br/>
+        		  </td>
+        		</tr>
+
+        		<tr>
+        		  <td colspan="2">
+        		    <h1>Exchange Destination Platform</h1> <hr/>
+        		  </td>
+        		</tr>
+        		<tr>
+        		  <td className="small">
+        		    Choose the exchange destination
+        		  </td>
+        		  <td>
+                <select value={this.state.pageState.exchangeDest} onChange={this.handleChange_ExchangeDest}>
+                  {this.allExchanges.map(this.getExchangeDestChoices)}
+                </select>
+                <p className="info">{this.displayExchangeDestInfo()}</p>
+        		  </td>
+        		</tr>
+        		<tr>
+        		  <td className="small">
+        		    Trading fees from {this.state.pageState.altcoin} to {this.state.pageState.mainCrypto}:
+        		  </td>
+        		  <td>
+        		    <input type="number" step="0.00001" min="0" value={this.state.pageState.fromMainCrypto_To_AltcoinDstFees} onChange={this.handleChange_fromMainCrypto_To_AltcoinDstFees} />{this.state.pageState.altcoin}
+                <p hidden={!this.state.pageState.fromMainCrypto_To_AltcoinDstFeesStatusDisplay} className="formError info">{this.displayTradingFeesDestStatus()}</p><br/>
+        		    <input type="number" step="0.001" min="0" value={this.state.pageState.fromMainCrypto_To_AltcoinDstFeesPercent} onChange={this.handleChange_fromMainCrypto_To_AltcoinDstFeesPercent} />%
+                <p hidden={!this.state.pageState.fromMainCrypto_To_AltcoinDstFeesPercentStatusDisplay} className="formError info">{this.displayTradingFeesPercentDestStatus()}</p><br/>
+        		  </td>
+        		</tr>
+        		<tr>
+        		  <td className="small">
+        		    Deposit fees:
+        		  </td>
+        		  <td>
+        		    <input type="number" step="0.00001" min="0" value={this.state.pageState.fromExchangeSource_To_DestFeesDepo} onChange={this.handleChange_FromExchangeSource_To_DestFeesDepo} />{this.state.pageState.altcoin}
+                <p hidden={!this.state.pageState.fromExchangeSource_To_DestFeesDepoStatusDisplay} className="formError info">{this.displayTransferFeesDstStatus()}</p><br/>
+        		    <input type="number" step="0.001" min="0" value={this.state.pageState.fromExchangeSource_To_DestFeesDepoPercent} onChange={this.handleChange_FromExchangeSource_To_DestFeesDepoPercent} />%
+                <p hidden={!this.state.pageState.fromExchangeSource_To_DestFeesDepoPercentStatusDisplay} className="formError info">{this.displayTransferFeesPercentDstStatus()}</p><br/>
+        		  </td>
+        		</tr>
+
+        		<tr>
+        		  <td colspan="2">
+        		    <h1>Currencies Price</h1> <hr/>
+        		  </td>
+        		</tr>
+        		<tr>
+        		  <td className="small">
+        		    On {this.state.pageState.exchangeSource}
+        		  </td>
+        		  <td>
+        		    <input type="number" step="0.00001" min="0" value={this.state.pageState.fromMainCrypto_To_AltcoinSrc} onChange={this.handleChange_fromMainCrypto_To_AltcoinSrc} /> {this.state.pageState.mainCrypto} = 1 {this.state.pageState.altcoin}
+        		  </td>
+        		</tr>
+        		<tr>
+        		  <td className="small">
+        		    On {this.state.pageState.exchangeDest}
+        		  </td>
+        		  <td>
+        		    <input type="number" step="0.00001" min="0" value={this.state.pageState.fromMainCrypto_To_AltcoinDst} onChange={this.handleChange_fromMainCrypto_To_AltcoinDst} /> {this.state.pageState.mainCrypto} = 1 {this.state.pageState.altcoin}
+        		  </td>
+        		</tr>
+        		<tr>
+        		  <td colspan="2">
+        		    <h1>Arbitrage Profit</h1> <hr/>
+        		  </td>
+        		</tr>
+        		<tr>
+        		  <td className="small">
+        		    Available on {this.state.pageState.exchangeSource} :
+        		  </td>
+        		  <td>
+        		    <input type="number" step="0.00001" min="0" value={this.state.pageState.availableMainCrypto} onChange={this.handleChange_AvailableMainCrypto} /> {this.state.pageState.mainCrypto}
+        		  </td>
+        		</tr>
+        		<tr>
+        		  <td className="small">
+        		    Minimum profit wanted :
+        		  </td>
+        		  <td>
+        		    <input type="number" step="0.00001" min="0" value={this.state.pageState.minProfit} onChange={this.handleChange_MinProfit} />{this.state.pageState.mainCrypto}<br/>
+        		    <input type="number" step="1" min="0" value={this.state.pageState.minProfitPercent} onChange={this.handleChange_MinProfitPercent} />%<br/>
+        		  </td>
+        		</tr>
+        		<tr>
+        		  <td className="small"></td>
+        		  <td style={{textAlign: "left"}}>
+        		    <button onClick={this.handleSubmit}>Make Profit</button>
+        		  </td>
+        		</tr>
+        	      </table>
+
+
+
+
+
+
+
+
+
+
+
+	    </div>
+
 	    </Col>
 	  </Row>
 

@@ -4,15 +4,23 @@
   "private": true,
   "dependencies": {
     "ajv": "^6.4.0",
+    "bigdecimal": "^0.6.1",
     "bootstrap": "^3.3.7",
+    "eslint": "^4.19.1",
     "json-loader": "^0.5.7",
     "json-query": "^2.2.2",
     "json-stringify": "^1.0.0",
     "path": "^0.12.7",
+    "plotly.js": "^1.36.1",
     "react": "^16.3.1",
     "react-bootstrap": "^0.32.1",
+    "react-chartjs": "^1.2.0",
     "react-dom": "^16.3.1",
-    "react-scripts": "1.1.4"
+    "react-function-plot": "0.0.14",
+    "react-plot": "^1.3.1",
+    "react-plotly.js": "^2.1.0",
+    "react-scripts": "1.1.4",
+    "react-svg-line-chart": "^2.0.1"
   },
   "scripts": {
     "start": "PORT=8080 react-scripts start",

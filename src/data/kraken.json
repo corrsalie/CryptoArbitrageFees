@@ -7,7 +7,6 @@
   "feesDepositLink":"https://support.kraken.com/hc/en-us/articles/360000292886-Digital-assets-deposit-fees",
   "feesWithdrawLink":"https://support.kraken.com/hc/en-us/articles/201893608-What-are-the-withdrawal-fees-",
   "feesTradingLink":"https://www.kraken.com/help/fees",
-  "tradingWarning":"changent trop, non mis à jour",  
   "withdraw":
    [
       {"symbol":"XBT", "Fees":0.0005, "badCryptoFees":"", "PercentFees":0},

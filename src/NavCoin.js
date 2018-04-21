@@ -3,7 +3,7 @@ import './App.css';
 import {Navbar, Nav} from 'react-bootstrap';
 
 class NavCoin extends Component {
-       
+
    getContact = () => {
     var username = "b2a1coralie";
 
@@ -15,14 +15,14 @@ class NavCoin extends Component {
 
     return <a href={"mail" + "to:" + username + "@" + hostname + "." + domain} >{linktext}</a>;
    }
-   
-  
+
+
   render() {
     return (
       <Navbar fixedTop>
 	<Navbar.Header>
 	  <Navbar.Brand>
-	    Arbitrage Fees
+	    Arbitrage Fees @2018
 	  </Navbar.Brand>
 	</Navbar.Header>
 	<Nav>
