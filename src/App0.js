@@ -5,8 +5,6 @@ import Result from './Result';
 import {Grid, Row, Col, Glyphicon} from 'react-bootstrap';
 import NavCoin from './NavCoin'
 var data = require('./data');
-var constants = require("./constants");
-
 
 class App extends Component {
 
@@ -14,6 +12,10 @@ class App extends Component {
     super(props);
 
     this.dataContent = data.getData() ;
+
+
+
+
 
     this.allExchanges = data.getAllPlaces(this.dataContent) ;
     this.allCoins = data.getAllDistinctCoinsOfAllPlaces(this.dataContent)
@@ -79,12 +81,6 @@ class App extends Component {
 
       fromMainCrypto_To_AltcoinSrc:0,
       fromMainCrypto_To_AltcoinDst:0,
-
-      tickerOrMakerSrc:constants.TICKER,
-      tickerOrMakerDest:constants.TICKER,
-      maxTradingVolume30daysSrc: 200000,
-      maxTradingVolume30daysDst: 200000,
-      maxTradingVolume: 100
     };
     var resultState = {
       exchangeSource: '',
@@ -104,12 +100,7 @@ class App extends Component {
       fromMainCrypto_To_AltcoinDst:0,
       fromExchangeSource_To_DestFeesDepo: 0,
       fromExchangeSource_To_DestFeesDepoPercent:0,
-      display:'no',
-      tickerOrMakerSrc:constants.TICKER,
-      tickerOrMakerDest:constants.TICKER,
-      maxTradingVolume30daysSrc: 0,
-      maxTradingVolume30daysDst: 0,
-      maxTradingVolume: 0
+      display:'no'
     };
 
     this.state = {
@@ -118,12 +109,7 @@ class App extends Component {
       lang: "eng",
       displayHowTo: false,
       displayDisclaimer: true,
-      displayGift: true,
-      tickerMakerSrcDisplay:true,
-      volume30SrcDisplay:true,
-      tickerMakerDstDisplay:true,
-      volume30DstDisplay:true,
-      volumeDstDisplay:true
+      displayGift: true
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -151,17 +137,6 @@ class App extends Component {
     this.handleChange_fromMainCrypto_To_AltcoinDstFeesPercent = this.handleChange_fromMainCrypto_To_AltcoinDstFeesPercent.bind(this);
     this.handleChange_FromExchangeSource_To_DestFeesDepo = this.handleChange_FromExchangeSource_To_DestFeesDepo.bind(this);
     this.handleChange_FromExchangeSource_To_DestFeesDepoPercent = this.handleChange_FromExchangeSource_To_DestFeesDepoPercent.bind(this);
-
-    this.handleChange_maxTradingVolume30daysSrc = this.handleChange_maxTradingVolume30daysSrc.bind(this);
-    this.handleChange_maxTradingVolume30daysDst = this.handleChange_maxTradingVolume30daysDst.bind(this);
-    this.handleChange_maxTradingVolume = this.handleChange_maxTradingVolume.bind(this);
-    this.handleClick_TickerSrc = this.handleClick_TickerSrc.bind(this);
-    this.handleClick_MakerSrc = this.handleClick_MakerSrc.bind(this);
-    this.handleClick_TickerDst = this.handleClick_TickerDst.bind(this);
-    this.handleClick_MakerDst = this.handleClick_MakerDst.bind(this);
-
-
-
   }
 
 
@@ -185,12 +160,7 @@ class App extends Component {
       fromMainCrypto_To_AltcoinDst:pageState.fromMainCrypto_To_AltcoinDst,
       fromExchangeSource_To_DestFeesDepo: pageState.fromExchangeSource_To_DestFeesDepo,
       fromExchangeSource_To_DestFeesDepoPercent:pageState.fromExchangeSource_To_DestFeesDepoPercent,
-      display:'yes',
-      tickerOrMakerSrc:pageState.tickerOrMakerSrc,
-      tickerOrMakerDest:pageState.tickerOrMakerDest,
-      maxTradingVolume30daysSrc: pageState.maxTradingVolume30daysSrc,
-      maxTradingVolume30daysDst: pageState.maxTradingVolume30daysDst,
-      maxTradingVolume: pageState.maxTradingVolume
+      display:'yes'
     };
       this.setState({resultState:resultState});
     }
@@ -338,9 +308,7 @@ class App extends Component {
       pageState.fromExchangeSource_To_DestFeesStatusDisplay= true;
       pageState.fromExchangeSource_To_DestFeesPercentStatusDisplay=true;
 
-      var tickerMakerSrcDisplay=true; // TODO
-      var volume30SrcDisplay=true; // TODO
-      this.setState({pageState:pageState, tickerMakerSrcDisplay: tickerMakerSrcDisplay, volume30SrcDisplay: volume30SrcDisplay});
+      this.setState({pageState:pageState});
 
     }
     handleChange_ExchangeDest(event) {
@@ -375,11 +343,7 @@ class App extends Component {
       pageState.fromMainCrypto_To_AltcoinDstFeesStatusDisplay = true;
       pageState.fromMainCrypto_To_AltcoinDstFeesPercentStatusDisplay = true;
 
-      var tickerMakerDstDisplay = true; // TODO
-      var volume30DstDisplay = true; // TODO
-      var volumeDstDisplay = true; // TODO
-
-      this.setState({pageState:pageState, tickerMakerDstDisplay:tickerMakerDstDisplay, volume30DstDisplay:volume30DstDisplay, volumeDstDisplay:volumeDstDisplay});
+      this.setState({pageState:pageState});
     }
 
     handleChange_MinProfitPercent(event) {
@@ -575,65 +539,6 @@ class App extends Component {
       this.setState({pageState:pageState});
     }
 
-    handleChange_maxTradingVolume30daysSrc(event) {
-
-      var pageState = this.state.pageState ;
-
-      pageState.maxTradingVolume30daysSrc = event.target.value;
-
-      this.setState({pageState:pageState});
-    }
-
-    handleChange_maxTradingVolume30daysDst(event) {
-
-      var pageState = this.state.pageState ;
-
-      pageState.maxTradingVolume30daysDst = event.target.value;
-
-      this.setState({pageState:pageState});
-    }
-
-    handleChange_maxTradingVolume(event) {
-
-      var pageState = this.state.pageState ;
-
-      pageState.maxTradingVolume = event.target.value;
-
-      this.setState({pageState:pageState});
-    }
-
-    handleClick_TickerSrc(event) {
-      var pageState = this.state.pageState ;
-      if(pageState.tickerOrMakerSrc === constants.MAKER){
-        pageState.tickerOrMakerSrc = constants.TICKER;
-        this.setState({pageState:pageState});
-      }
-    }
-
-    handleClick_MakerSrc(event) {
-      var pageState = this.state.pageState ;
-      if(pageState.tickerOrMakerSrc === constants.TICKER){
-        pageState.tickerOrMakerSrc = constants.MAKER;
-        this.setState({pageState:pageState});
-      }
-    }
-
-    handleClick_TickerDst(event) {
-      var pageState = this.state.pageState ;
-      if(pageState.tickerOrMakerDest === constants.MAKER){
-        pageState.tickerOrMakerDest = constants.TICKER;
-        this.setState({pageState:pageState});
-      }
-    }
-
-    handleClick_MakerDst(event) {
-      var pageState = this.state.pageState ;
-      if(pageState.tickerOrMakerDest === constants.TICKER){
-        pageState.tickerOrMakerDest = constants.MAKER;
-        this.setState({pageState:pageState});
-      }
-    }
-
    getExchangeSourceChoices = (exchange, i) => {
 
      return <option id={exchange+"ex_scr"} selected={exchange === this.state.pageState.exchangeSource} value={exchange}>{exchange}</option> ;
@@ -826,6 +731,15 @@ You can also support me by making a gift if you want to :). Here are my public c
               </select>
             </td>
           </tr>
+          <tr>
+            <td className="small">
+              Traded max volume
+            </td>
+            <td>
+              <input type="range" min="0" max="100" value="1" step="0.01" id="myRange"/> BTC
+              <p className="info">In Some exchange places, that can change the fees</p>
+            </td>
+          </tr>
 
           <tr>
             <td colspan="2">
@@ -843,25 +757,14 @@ You can also support me by making a gift if you want to :). Here are my public c
               <p className="info">{this.displayExchangeSrcInfo()}</p>
             </td>
           </tr>
-
-          <tr hidden={!this.state.tickerMakerSrcDisplay}>
+          <tr>
             <td className="small">
               Ticker or Maker
             </td>
             <td>
-              <input type="radio" name="tickermakersrc" value={constants.TICKER} checked={this.state.pageState.tickerOrMakerSrc === constants.TICKER} onClick={this.handleClick_TickerSrc}/> Ticker<br/>
-              <input type="radio" name="tickermakersrc" value={constants.MAKER} checked={this.state.pageState.tickerOrMakerSrc === constants.MAKER} onClick={this.handleClick_MakerSrc}/> Maker
-
-              <p className="info">In {this.state.pageState.exchangeSource}, that can change the fees.</p>
-            </td>
-          </tr>
-          <tr hidden={!this.state.volume30SrcDisplay}>
-            <td className="small">
-              Traded max volume in the last 30 days
-            </td>
-            <td>
-              <input className="sliderVolume" type="range" min="0" max="50000000" value={this.state.pageState.maxTradingVolume30daysSrc} step="200000" id="maxvolume30" onChange={this.handleChange_maxTradingVolume30daysSrc}/>{this.state.pageState.maxTradingVolume30daysSrc}$
-              <p className="info">In {this.state.pageState.exchangeSource}, that can change the fees.</p>
+              <input type="radio" name="tickermakersrc" value="makersrc"/> Maker<br/>
+              <input type="radio" name="tickermakersrc" value="tickersrc"/> Ticker
+              <p className="info">In some exchange places, the fees can change.</p>
             </td>
           </tr>
           <tr>
@@ -886,6 +789,7 @@ You can also support me by making a gift if you want to :). Here are my public c
               <p hidden={!this.state.pageState.fromExchangeSource_To_DestFeesPercentStatusDisplay} className="formError info">{this.displayTransferFeesPercentSrcStatus()}</p><br/>
             </td>
           </tr>
+
           <tr>
             <td colspan="2">
               <h1>Exchange Destination Platform</h1> <hr/>
@@ -902,32 +806,14 @@ You can also support me by making a gift if you want to :). Here are my public c
               <p className="info">{this.displayExchangeDestInfo()}</p>
             </td>
           </tr>
-          <tr hidden={!this.state.tickerMakerDstDisplay}>
+          <tr>
             <td className="small">
               Ticker or Maker
             </td>
             <td>
-              <input type="radio" name="tickermakerdst" value={constants.TICKER} checked={this.state.pageState.tickerOrMakerDest === constants.TICKER} onClick={this.handleClick_TickerDst}/> Ticker<br/>
-              <input type="radio" name="tickermakerdst" value={constants.MAKER} checked={this.state.pageState.tickerOrMakerDest === constants.MAKER} onClick={this.handleClick_MakerDst}/> Maker
-              <p className="info">In {this.state.pageState.exchangeDest}, that can change the fees.</p>
-            </td>
-          </tr>
-          <tr hidden={!this.state.volume30DstDisplay}>
-            <td className="small">
-              Traded max volume in the last 30 days
-            </td>
-            <td>
-              <input className="sliderVolume" type="range" min="0" max="50000000" value={this.state.pageState.maxTradingVolume30daysDst} step="200000" id="maxvolume30" onChange={this.handleChange_maxTradingVolume30daysDst}/>{this.state.pageState.maxTradingVolume30daysDst}$
-              <p className="info">In {this.state.pageState.exchangeDest}, that can change the fees.</p>
-            </td>
-          </tr>
-          <tr hidden={!this.state.volumeDstDisplay}>
-            <td className="small">
-              Traded max volume in this arbitrage
-            </td>
-            <td>
-              <input className="sliderVolume" type="range" min="0" max="10000" value={this.state.pageState.maxTradingVolume} step="100" id="maxvolume" onChange={this.handleChange_maxTradingVolume}/>{this.state.pageState.maxTradingVolume}$
-              <p className="info">In {this.state.pageState.exchangeDest}, that can change the deposit fees.</p>
+              <input type="radio" name="tickermakerdest" value="makerdest"/> Maker<br/>
+              <input type="radio" name="tickermakerdest" value="tickerdest"/> Ticker
+              <p className="info">In some exchange places, the fees can change.</p>
             </td>
           </tr>
           <tr>
